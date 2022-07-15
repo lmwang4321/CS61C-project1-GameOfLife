@@ -87,4 +87,5 @@ int main(int argc, char **argv)
     writeData(newImg);
     freeImage(image);
     freeImage(newImg);
+    int a = 1;
 }

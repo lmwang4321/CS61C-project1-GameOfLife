@@ -62,8 +62,10 @@ Color *evaluateOneCell(Image *image, int row, int col, uint32_t rule)
     int aliveNeighboursB = 0;
 
     for(int i = 0; i < 8; i++){
+        int dxi = dx[i];
+        int dyi = dy[i];
         int neighbourRow = circular(row + dx[i], totRows);
-        int neighbourCol = circular(row + dy[i], totCols);
+        int neighbourCol = circular(col + dy[i], totCols);
         int neighbourIdx = neighbourCol + neighbourRow * totCols;
 
         uint8_t neighbourColorR = (*(img+neighbourIdx))->R;
@@ -84,9 +86,9 @@ Color *evaluateOneCell(Image *image, int row, int col, uint32_t rule)
     }
 
     // after for loops, we have the code now
-    int codeR = 9 * isAliveR + aliveNeighboursR;
-    int codeG = 9 * isAliveG + aliveNeighboursG;
-    int codeB = 9 * isAliveB + aliveNeighboursB;
+    int codeR = (isAliveR * 9) + aliveNeighboursR;
+    int codeG = (isAliveG * 9) + aliveNeighboursG;
+    int codeB = (isAliveB * 9)+ aliveNeighboursB;
 
     cell -> R = (rule & (1 << codeR)) ? 255: 0;
     cell -> G = (rule & (1 << codeG)) ? 255: 0;
@@ -147,4 +149,3 @@ int main(int argc, char **argv)
     freeImage(newImg);
     int a = 1;
 }
-

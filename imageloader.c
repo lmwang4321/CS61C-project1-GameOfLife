@@ -49,7 +49,7 @@ Image *readData(char *filename)
         printf("file need to be P3 formatted");
         return 0;
     }
-    fscanf(fp, "%u %u %hhu", &rows, &cols, &maxColor);
+    fscanf(fp, "%u %u %hhu", &cols, &rows, &maxColor);
     Image * img = (Image *) malloc(sizeof(Image));
     // Color * color;
     img->image = (Color**) malloc(rows*cols*sizeof(Color*));
@@ -67,6 +67,7 @@ Image *readData(char *filename)
         (*(img->image+i))->B = B;
         i++;
     }
+
     fclose(fp);
     return img;
     //YOUR CODE HERE
@@ -84,6 +85,7 @@ void writeData(Image *image)
         for (int j = 0; j < cols - 1; j++){
             printf("%3hhu %3hhu %3hhu   ", (*img) -> R, (*img) -> G, (*img) -> B);
             img++;
+            int a = 1;
         }
         printf("%3hhu %3hhu %3hhu\n", (*img) -> R, (*img) -> G, (*img) -> B);
         img++;
